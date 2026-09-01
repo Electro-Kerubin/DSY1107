@@ -1,4 +1,4 @@
-import { PublicClientApplication, IPublicClientApplication, LogLevel } from '@azure/msal-browser';
+import { PublicClientApplication, IPublicClientApplication, LogLevel, BrowserCacheLocation} from '@azure/msal-browser';
 import { environment } from './environments/environment';
 
 export function msalInstanceFactory(): IPublicClientApplication {
@@ -9,7 +9,11 @@ export function msalInstanceFactory(): IPublicClientApplication {
       redirectUri: environment.azure.redirectUri
     },
     cache: {
-      cacheLocation: 'localStorage'
+        cacheLocation: BrowserCacheLocation.LocalStorage,
+        //storeAuthStateInCookie: false, // solo true si se requiere IE11/Edge legacy
+    },
+    system: {
+        
     }
   });
 }
